@@ -1,0 +1,18 @@
+# .htaccess
+
+# Enable URL rewriting
+RewriteEngine On
+
+# Hide the .php extension from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# Deny access to sensitive directories
+<FilesMatch "(^config|^middleware|^logs)">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Prevent directory listing
+Options -Indexes
